@@ -119,8 +119,8 @@
     .hero {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 1fr;
-      align-items: center;
+      grid-template-columns: 55% 45%;
+      align-items: stretch;
       position: relative;
       overflow: hidden;
     }
@@ -128,25 +128,43 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 60% at 65% 45%, rgba(191,155,74,0.07) 0%, transparent 65%),
-        radial-gradient(ellipse 40% 50% at 20% 70%, rgba(191,155,74,0.04) 0%, transparent 55%);
+        radial-gradient(ellipse 60% 70% at 25% 50%, rgba(191,155,74,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 10% 80%, rgba(191,155,74,0.03) 0%, transparent 55%);
       pointer-events: none;
+      z-index: 0;
     }
-    .hero-rule {
-      position: absolute;
-      right: 2.5rem;
-      top: 15%;
-      bottom: 15%;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, var(--gold) 25%, var(--gold) 75%, transparent);
-      opacity: 0.12;
+    .hero-content-col {
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 1;
     }
     .hero-inner {
       position: relative;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 10rem 2.5rem 5rem;
+      padding: 10rem 3rem 5rem 2.5rem;
       width: 100%;
+      max-width: 660px;
+      margin-left: auto;
+    }
+    .hero-img-col {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-img-col img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-img-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, var(--bg) 0%, rgba(12,11,9,0.15) 35%, transparent 60%),
+        linear-gradient(to top, var(--bg) 0%, transparent 20%);
+      z-index: 1;
     }
     .eyebrow {
       display: inline-flex;
@@ -659,7 +677,10 @@
     @media (max-width: 900px) {
       .nav-links { display: none; }
       nav { padding: 1.25rem 1.5rem; }
-      .hero-inner { padding: 9rem 1.5rem 4rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-img-col { display: none; }
+      .hero-content-col { min-height: 100vh; }
+      .hero-inner { padding: 9rem 1.5rem 4rem; max-width: none; margin-left: 0; }
       .hero-stats { gap: 2rem; }
       section { padding: 4.5rem 1.5rem; }
       .services-grid { grid-template-columns: 1fr 1fr; }
@@ -692,7 +713,8 @@
   <!-- ── HERO ── -->
   <section class="hero" id="home">
     <div class="hero-glow"></div>
-    <div class="hero-rule"></div>
+    <!-- Left: content -->
+    <div class="hero-content-col">
     <div class="hero-inner">
       <div class="eyebrow">Kalamazoo, Michigan</div>
       <h1>
@@ -721,6 +743,12 @@
           <div class="stat-lbl">Google Rating</div>
         </div>
       </div>
+    </div>
+    </div>
+    <!-- Right: photo -->
+    <div class="hero-img-col">
+      <img src="https://placehold.co/800x1080/1C1915/BF9B4A?text=Client+Photo" alt="Client getting a haircut at Vine Street Barber" />
+      <div class="hero-img-overlay"></div>
     </div>
   </section>
 
